@@ -1,0 +1,29 @@
+{
+  "name": "eloquentdaily_bot",
+  "version": "1.0.0",
+  "description": "Twitter Bot",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/forgoroe/eloquentdaily_bot.git"
+  },
+  "keywords": [
+    "bot",
+    "twitter",
+    "eloquent",
+    "daily"
+  ],
+  "author": "Forgoroe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/forgoroe/eloquentdaily_bot/issues"
+  },
+  "homepage": "https://github.com/forgoroe/eloquentdaily_bot#readme",
+  "dependencies": {
+    "twit": "^2.2.9"
+  }
+}
