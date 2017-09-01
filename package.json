@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/forgoroe/eloquentdaily_bot#readme",
   "dependencies": {
+    "markovchain": "^1.0.2",
     "twit": "^2.2.9"
   }
 }
