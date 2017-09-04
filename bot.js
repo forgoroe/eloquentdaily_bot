@@ -20,6 +20,7 @@ function run(){
 		.then(modifyTweets)
 		.catch((err)=>
 			console.log(err))
+		//.then(postToTwitter);
 }
 
 function retrieveTweets(){
@@ -29,11 +30,14 @@ function retrieveTweets(){
 }
 
 function postToTwitter(newTweetsParam){
+	let message = '.@'+ newTweetsParam[0].author + " " + newTweetsParam[0].tweet + " #xkcd";
+
 	statusObject = {
 		status: message,
 	}
 	
-	return T.post('statuses/update', statusObject).catch((err) => console.log(err));	
+	T.post('statuses/update', statusObject).catch((err) => console.log(err)).then(() =>
+		console.log('Tweet posted: ', message));	
 }
 
 function checkTweets(result){
@@ -44,12 +48,11 @@ function checkTweets(result){
 		let author = result.data.users[i].screen_name;
 		let originalTweet = result.data.users[i].status.text;
 
-		console.log(result.data.users[i].screen_name, result.data.users[i].status.text, '\n\n');
-
 		if(result.data.users[i].status){
 			let needsModifying = checkForTriggers(originalTweet);
-			
+
 			if(needsModifying){
+				console.log("NEEDS MODIFYING:", result.data.users[i].screen_name + ':', result.data.users[i].status.text, '\n\n');
 				toModify.push({'author': author, 'tweet': originalTweet});
 			}
 		}
@@ -102,8 +105,7 @@ function modifyTweets(stuffToModify){
 			var modifiedTweet =	stuffToModify[i].tweet.replace(keywords, function(matched){
 			return mapObj[matched];
 		});
-		console.log("modified tweet: ", modifiedTweet);
-		
+
 		newTweets.push({
 			author: stuffToModify[i].author,
 			tweet: modifiedTweet
