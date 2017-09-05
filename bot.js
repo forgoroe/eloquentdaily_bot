@@ -11,7 +11,6 @@ When one of my followers tweet something, check the contents of their tweets. If
 contain at least one of a particular keyword, post a tweet modifying those keywords with my own.
 */
 
-
 run();
 setInterval(run, 1000*60*15);
 setInterval(clearAlreadyPosted, 1000*60*60*2);
@@ -26,6 +25,7 @@ function run(){
 
 function clearAlreadyPosted(){
 	alreadyPosted.length = 0;
+	console.log('CLEARED LIST OF ALREADY POSTED TWEETS.', getCurrentTime());
 }
 
 function retrieveTweets(){
@@ -45,11 +45,10 @@ function postToTwitter(newTweetsParam){
 			status: message,
 			}
 			
-			// T.post('statuses/update', statusObject).catch((err) => console.log(err)).then(() => {
-			// 	console.log('Tweet posted: ', message);
-			// });
+			T.post('statuses/update', statusObject).catch((err) => console.log(err)).then(() => {
+				console.log('POSTED TO TWITTER: ', message, getCurrentTime());
+			});
 
-			console.log('POSTED TO TWITTER: ', message, getCurrentTime());
 			alreadyPosted.push(message);
 		}
 		
