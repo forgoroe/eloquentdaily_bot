@@ -1,5 +1,5 @@
 # eloquentdaily_bot
-Substitutes news tweets with [https://xkcd.com/1288/](https://xkcd.com/1288/)
+Twitter that substitutes news tweets with [https://xkcd.com/1288/](https://xkcd.com/1288/)
 
 [https://twitter.com/eloquent_bot](https://twitter.com/eloquent_bot)
 
