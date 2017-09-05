@@ -1,6 +1,6 @@
 var Twit = require('twit');
 var config = require('./config');
-var xkcd = require('./xkcdSubsparam');
+var xkcd = require('./xkcdSubsParam');
 
 console.log('beep boop', '\n');
 var alreadyPosted = [];
@@ -48,7 +48,6 @@ function postToTwitter(newTweetsParam){
 			T.post('statuses/update', statusObject).catch((err) => console.log(err)).then(() => {
 				console.log('POSTED TO TWITTER: ', message, getCurrentTime());
 			});
-
 			alreadyPosted.push(message);
 		}
 		
@@ -57,7 +56,6 @@ function postToTwitter(newTweetsParam){
 }
 
 function checkTweets(result){
-	let author = result.data.users;
 	var toModify = [];
 
 	console.log('Checking for Tweets... \n');
@@ -99,7 +97,8 @@ function modifyTweets(stuffToModify){
 
 	for(var i = 0; i<stuffToModify.length; i++){
 			var modifiedTweet =	stuffToModify[i].tweet.replace(xkcd.keywords, function(matched){
-			return xkcd.substitutionsObj[matched];
+			let lowerCaseMatched = matched.toLowerCase();
+			return xkcd.substitutionsObj[lowerCaseMatched];
 		});
 
 		newTweets.push({

@@ -55,6 +55,6 @@ module.exports.substitutionsObj = {
 	'latest': "final",
 	'disrupt': "destroy",
 	'meeting': "ménage à trois",
-	'scientists': "channing tatum and his friends",
+	'scientists': "Channing Tatum and his friends",
 	"you won't believe": "I'm really sad about"
 };
