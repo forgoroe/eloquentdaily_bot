@@ -38,20 +38,23 @@ function postToTwitter(newTweetsParam){
 	var toTweet;
 	if(newTweetsParam.length){
 		toTweet = newTweetsParam.pop();
-		var message = '.@'+ toTweet.author + " " + toTweet.tweet + " #xkcd";
+		var message = '.@'+ toTweet.author + " " + toTweet.tweet;
 
 		if (alreadyPosted.indexOf(message) == -1){
+			if(message.length>140){
+				message = tweetTrimmer(message) + " #xkcd";
+			}
+
 			let statusObject = {
 			status: message,
 			}
-			
+
 			T.post('statuses/update', statusObject).catch((err) => console.log(err)).then(() => {
-				console.log('POSTED TO TWITTER: ', message, getCurrentTime(), '\n');
+				console.log('POSTED TO TWITTER: ', message, getCurrentTime(), '\n');	
 				alreadyPosted.push(message);
 			});
-
 		}
-
+		
 		setTimeout(() => postToTwitter(newTweetsParam), 5000);
 	}
 }
@@ -92,6 +95,14 @@ function checkForTriggers(originalTweet){
 	return false;
 }
 
+function tweetTrimmer(tweetMessage){
+	let trimmedTweet;
+
+	console.log('Tweet max length exceeded by '+ `${tweetMessage.length-140}`+'. Trimming...\n');
+	trimmedTweet = tweetMessage.substring(0,130).trim() + "...";
+
+	return trimmedTweet;
+}
 
 function modifyTweets(stuffToModify){
 	let newTweets = [];
@@ -101,11 +112,6 @@ function modifyTweets(stuffToModify){
 			let lowerCaseMatched = matched.toLowerCase();
 			return xkcd.substitutionsObj[lowerCaseMatched];
 		});
-
-		if(modifiedTweet.length>140){
-			console.log('Tweet max length exceeded by '+ `${modifiedTweet.length-140}`+'. Trimming...\n');
-			modifiedTweet = modifiedTweet.substring(0,133) + "...";
-		}
 
 		newTweets.push({
 			author: stuffToModify[i].author,
