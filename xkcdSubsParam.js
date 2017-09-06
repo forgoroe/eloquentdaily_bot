@@ -1,4 +1,4 @@
-module.exports.keywords = /gaffe|ancient|star-studded|remains to be seen|silver bullet|subway system|surprising|war of words|tension|cautiously optimistic|doctor who|win votes|behind the headlines|email|facebook post|tweet|facebook ceo|latest|disrupt|meeting|scientists|you won't believe|debate|self driving|poll|candidate|drone|vows to|at large|successfully|expands|first-degree|second-degree|third-degree|an unknown number|front runner|global|years|minutes|no indication|urged restraint by|horsepower|witnesses|allegedly|new study|rebuild|space|google glass|smartphone|electric|senator|\bcar\b|election|congressional leaders|homeland security|could not be reached for comment/gi;
+module.exports.keywords = /gaffe|ancient|star-studded|remains to be seen|silver bullet|subway system|surprising|war of words|tension|cautiously optimistic|doctor who|win votes|behind the headlines|email|facebook post|tweet|facebook ceo|\bdisrupt\b|meeting|scientists|you won't believe|debate|self driving|poll|candidate|drone|vows to|at large|successfully|expands|first-degree|second-degree|third-degree|an unknown number|front runner|global|years|minutes|no indication|urged restraint by|horsepower|witnesses|allegedly|new study|rebuild|space|google glass|smartphone|electric|senator|\bcar\b|election|congressional leaders|homeland security|could not be reached for comment/gi;
 
 module.exports.substitutionsObj = {
 	witnesses: "these dudes I know",
@@ -51,8 +51,7 @@ module.exports.substitutionsObj = {
 	'email': "poem",
 	'facebook post': "poem",
 	'tweet': "poem",
-	'facebook ceo': "this guy", 
-	'latest': "final",
+	'facebook ceo': "this guy",
 	'disrupt': "destroy",
 	'meeting': "ménage à trois",
 	'scientists': "Channing Tatum and his friends",
