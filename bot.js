@@ -96,16 +96,16 @@ function checkForTriggers(originalTweet){
 }
 
 function tweetTrimmer(tweetMessage){
+	let URLsPattern = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
+	let urls = [];
+	let newTweet;
+
 	urls = tweetMessage.match(URLsPattern);
-		if(urls != null){
+		if(urls.length){
 			let ownCharacters = 10;
 			let urlLengthValue = 24;
-			let MAX_LENGTH  = 140;	
-			let URLsPattern = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
-			let urls = []; 
+			let MAX_LENGTH  = 140;
 			let withoutUrls;
-			let newTweet;
-
 			let numberOfUrls = urls.length;
 			withoutUrls = tweetMessage.replace(URLsPattern, '');
 
