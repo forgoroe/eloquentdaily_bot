@@ -42,9 +42,9 @@ function postToTwitter(newTweetsParam){
 
 		if (alreadyPosted.indexOf(message) == -1){
 			if(message.length>140){
-				message = tweetTrimmer(message) + " #xkcd";
+				message = tweetTrimmer(message);
 			}
-
+			
 			let statusObject = {
 			status: message,
 			}
@@ -96,12 +96,29 @@ function checkForTriggers(originalTweet){
 }
 
 function tweetTrimmer(tweetMessage){
-	let trimmedTweet;
+	urls = tweetMessage.match(URLsPattern);
+		if(urls != null){
+			let ownCharacters = 10;
+			let urlLengthValue = 24;
+			let MAX_LENGTH  = 140;	
+			let URLsPattern = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
+			let urls = []; 
+			let withoutUrls;
+			let newTweet;
 
-	console.log('Tweet max length exceeded by '+ `${tweetMessage.length-140}`+'. Trimming...\n');
-	trimmedTweet = tweetMessage.substring(0,130).trim() + "...";
+			let numberOfUrls = urls.length;
+			withoutUrls = tweetMessage.replace(URLsPattern, '');
 
-	return trimmedTweet;
+			if(withoutUrls.length + numberOfUrls*urlLengthValue + ownCharacters> MAX_LENGTH){
+				withoutUrls = withoutUrls.substring(0, MAX_LENGTH - (numberOfUrls*urlLengthValue+ownCharacters)) + "...";
+				for(let i = 0; i<urls.length; i++){
+					newTweet = withoutUrls += ' ' + urls[i] + ' #xkcd';
+				}
+			}
+		} else {
+			newTweet = tweetMessage.substring(0,130).trim() + "...";
+		}
+	return newTweet;
 }
 
 function modifyTweets(stuffToModify){
