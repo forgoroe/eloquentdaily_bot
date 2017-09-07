@@ -18,6 +18,7 @@ The bot tweets the modified tweet mentioning original tweet author.
 I wanted to make a twitter bot! ... Yeah. !
 
 ### Resources and packages
+- [heroku (where bot is deployed)](https://www.heroku.com/)
 - [nodejs](https://nodejs.org/en/)
 - [https://github.com/ttezel/twit](https://github.com/ttezel/twit)
 - [https://dev.twitter.com/overview/api](https://dev.twitter.com/overview/api)
