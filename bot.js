@@ -13,7 +13,7 @@ contain at least one of a particular keyword, post a tweet modifying those keywo
 
 run();
 setInterval(run, 1000*60*15);
-setInterval(clearAlreadyPosted, 1000*60*60*2);
+setInterval(clearAlreadyPosted, 1000*60*60*12);
 
 function run(){
 	retrieveTweets()
