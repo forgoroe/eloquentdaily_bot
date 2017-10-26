@@ -12,7 +12,7 @@ contain at least one of a particular keyword, post a tweet modifying those keywo
 */
 
 run();
-setInterval(run, 1000*60*15);
+setInterval(run, 1000*60*30);
 setInterval(clearAlreadyPosted, 1000*60*60*12);
 
 function run(){
@@ -20,7 +20,9 @@ function run(){
 		.then(modifyTweets)
 		.catch((err)=>
 			console.log(err))
-		.then(postToTwitter);
+		.then(postToTwitter)
+		.catch((err)=>
+			console.log(err));
 }
 
 function clearAlreadyPosted(){
@@ -38,7 +40,7 @@ function postToTwitter(newTweetsParam){
 	var toTweet;
 	if(newTweetsParam.length){
 		toTweet = newTweetsParam.pop();
-		var message = '.@'+ toTweet.author + " " + toTweet.tweet;
+		var message = '#'+ toTweet.author + " " + toTweet.tweet;
 
 		if (alreadyPosted.indexOf(message) == -1){
 			if(message.length>140){
@@ -99,10 +101,10 @@ function tweetTrimmer(tweetMessage){
 	let URLsPattern = /(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/igm;
 	let urls = [];
 	let newTweet;
-
 	urls = tweetMessage.match(URLsPattern);
-		if(urls.length){
-			let ownCharacters = 10;
+
+		if(urls != null){
+			let ownCharacters = 9;
 			let urlLengthValue = 24;
 			let MAX_LENGTH  = 140;
 			let withoutUrls;
@@ -112,11 +114,12 @@ function tweetTrimmer(tweetMessage){
 			if(withoutUrls.length + numberOfUrls*urlLengthValue + ownCharacters> MAX_LENGTH){
 				withoutUrls = withoutUrls.substring(0, MAX_LENGTH - (numberOfUrls*urlLengthValue+ownCharacters)) + "...";
 				for(let i = 0; i<urls.length; i++){
-					newTweet = withoutUrls += ' ' + urls[i] + ' #xkcd';
+					newTweet = withoutUrls += ' ' + urls[i];
 				}
+				newTweet = newTweet + " #xkcd";
 			}
 		} else {
-			newTweet = tweetMessage.substring(0,130).trim() + "...";
+			newTweet = tweetMessage.substring(0,130).trim() + "... #xkcd";
 		}
 	return newTweet;
 }
