@@ -40,7 +40,7 @@ function postToTwitter(newTweetsParam){
 	var toTweet;
 	if(newTweetsParam.length){
 		toTweet = newTweetsParam.pop();
-		var message = '#'+ toTweet.author + " " + toTweet.tweet;
+		var message = '#'+ toTweet.author + " " + toTweet.tweet + " #xkcd";
 
 		if (alreadyPosted.indexOf(message) == -1){
 			if(message.length>140){
